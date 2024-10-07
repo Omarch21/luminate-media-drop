@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./luminate-backend
+      dockerfile: Dockerfile # Adjust this path if necessary
+    ports:
+      - "5002:8080"  # Map the backend port
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development  # Set any environment variables you need
+
+  frontend:
+    build:
+      context: ./Luminate-chicago
+      dockerfile: Dockerfile  # Adjust this path if necessary
+    ports:
+      - "5001:8080"  # Map the frontend port
+    depends_on:
+      - backend  # Ensure the backend is started before the frontend
